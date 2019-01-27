@@ -1,0 +1,9 @@
+{
+  "name": "@tsuki/server-ts",
+  "version": "1.0.0",
+  "description": "Tsuki Server",
+  "main": "index.js",
+  "author": "Gustavo Quinta - MoonTory",
+  "license": "MIT",
+  "private": true
+}
