@@ -1,21 +1,34 @@
-import { Application } from 'express';
-import { Server as HttpServer } from 'http';
+import express, { Application, urlencoded, json } from 'express';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
-export class App {
-  public express: Application;
-  public server: HttpServer;
-  public port: number;
-  
-  constructor(express: Application, server: HttpServer, port: number) {
-    this.express = express;
-    this.server = server;
-    this.port = port;
+class TsukiServer {
 
-    this.initMiddlewares();
+  public Express: Application;
+
+  constructor() {
+    this.Express = express();
+
+    this.config();
     this.initControllers();
-  }
+  };
 
-  private initMiddlewares() {  }
+  private config(): void {
+    console.log('Configuring Express...');
+    this.Express.use(helmet());
+    this.Express.use(cors());
+    this.Express.use(json());
+    this.Express.use(urlencoded({ extended: false }));
+    this.Express.use(cookieParser());
+    this.Express.use(morgan('dev'));
+  };
 
-  private initControllers() {  }
+  private initControllers(): void {
+    console.log('Initialinzing Controllers...');
+  };
+
 }
+
+export default new TsukiServer().Express;
