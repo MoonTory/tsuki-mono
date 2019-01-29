@@ -2,6 +2,7 @@
  * Node_Module dependencies.
  */
 import express, { Application, urlencoded, json } from 'express';
+import compression from 'compression';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -11,6 +12,7 @@ import cookieParser from 'cookie-parser';
  * Local_Module dependencies.
  */
 import importControllers from '../api/utils/create-controllers';
+import connectMongo from '../infra/db/mongo/connect-mongo';
 
 /**
  * Configs.
@@ -31,12 +33,14 @@ class TsukiServer {
     console.log('Configuring Express...');
     this.Express.use(helmet());
     this.Express.use(cors());
+    this.Express.use(compression());
     this.Express.use(json());
     this.Express.use(urlencoded({ extended: false }));
     this.Express.use(cookieParser());
     this.Express.use(morgan('dev'));
 
-    this.initControllers(await importControllers(['index', 'user', 'book']));
+    await connectMongo();
+    this.initControllers(await importControllers(['index', 'user']));
   };
 
   private initControllers(controllers: any) {

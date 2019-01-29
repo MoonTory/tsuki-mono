@@ -11,12 +11,12 @@ export const {
   // GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || '',
 
   // Mongo Config
-  // DB_USER = process.env.DB_USER || '',
-  // DB_PASS = process.env.DB_PASS || '',
-  // DB_HOST = process.env.DB_HOST || '',
-  // DB_PORT = process.env.DB_PORT || '',
-  // DB_NAME = process.env.DB_NAME || '',
-  // MONGO_URI = `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
+  DB_USER = process.env.DB_USER,
+  DB_PASS = process.env.DB_PASS,
+  DB_HOST = process.env.DB_HOST,
+  DB_PORT = process.env.DB_PORT,
+  DB_NAME = process.env.DB_NAME,
+  MONGO_URI = `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
 
   // Express Session Config
   // SESSION_NAME = process.env.SESSION_NAME || '',

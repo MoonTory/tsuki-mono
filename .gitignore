@@ -6,7 +6,11 @@ tmp/
 temp/
 dist
 .next
-.env
+*.env
 storybook-static/
 
 yarn.*
+
+ormconfig.*
+
+*.lock
