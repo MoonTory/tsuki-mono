@@ -18,10 +18,15 @@ class UserController extends BaseController {
 
   protected async initializeRoutes() {
     try {
-      const newUser = new UserModel({ name: 'John Doe' });
-      await newUser.save();
+      this.router.get(this.path, async (req: Request, res: Response, next: NextFunction) => {
+        const newUser = new UserModel({
+          method: 'local',
+          username: 'admin',
+          email: 'gustavoqnt40@gmail.com',
+          password: 'admin'
+        });
+        await newUser.save();
 
-      this.router.get(this.path, (req: Request, res: Response, next: NextFunction) => {
         res.status(200).json({
           payload: {
             message: `handling ${req.method} to ${req.baseUrl + this.path}`,
@@ -32,7 +37,6 @@ class UserController extends BaseController {
     } catch (error) {
       throw error;
     }
-
   }
 }
 

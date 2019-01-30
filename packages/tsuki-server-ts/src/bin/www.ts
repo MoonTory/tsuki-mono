@@ -3,7 +3,6 @@
 /**
  * Node Module dependencies.
  */
-import 'reflect-metadata';
 import debug from 'debug';
 import http from 'http';
 
