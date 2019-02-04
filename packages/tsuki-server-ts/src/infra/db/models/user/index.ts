@@ -37,18 +37,18 @@ export const UserSchema = new Schema({
   timestamps: true
 });
 
-// UserSchema.pre('save', async function(next) { 
-//   try {
-//     if (this.method !== 'local') {
-//       next();
-//     }
+UserSchema.pre('save', async function (this: any, next) { 
+  try {
+    if (this.method !== 'local') {
+      next();
+    }
 
-//     this.password = await this.hashPassword(this.password);
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+    this.password = await this.hashPassword(this.password);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 UserSchema.methods.hashPassword = async function(password: string) {
   try {

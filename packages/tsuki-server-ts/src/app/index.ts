@@ -11,8 +11,8 @@ import cookieParser from 'cookie-parser';
 /**
  * Local_Module dependencies.
  */
-import importControllers from '../api/utils/create-controllers';
-import connectMongo from '../infra/db/mongo/connect-mongo';
+import importControllers from '../api/utils/importControllers';
+import connectMongo from '../infra/db/mongo/connectMongo';
 
 /**
  * Configs.
