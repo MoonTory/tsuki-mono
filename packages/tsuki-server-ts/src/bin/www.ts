@@ -44,7 +44,7 @@ const main = async (): Promise<void> => {
       return port;
     } else {
       return false;
-  }
+    }
   }
 
   /**

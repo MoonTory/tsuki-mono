@@ -18,7 +18,7 @@ class RootController extends BaseController {
     this.router.get(this.path, (req: Request, res: Response, next: NextFunction) => {
       res.status(200).json({
         payload: {
-          message: `handling ${req.method} to ${req.baseUrl + this.path}`
+          message: `RootController handling ${req.method} to ${req.baseUrl + this.path}`
         }
       });
     });

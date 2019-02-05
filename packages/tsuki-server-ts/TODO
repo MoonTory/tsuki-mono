@@ -1,0 +1,33 @@
+Todos:
+  Explore the option of using JWT or Cookie base authentication, I am probably leaning towards using JWT,
+  for authentication mostly for the fact of already having prior experience in implementing.
+
+  Core Auth Functionality:
+    ☐ Press Cmd/Ctrl+Enter to add a new todo
+    ☐ Users can sign up for to the app with a unique email
+    ☐ Users cannot sign up for to the app with a duplicate email
+    ☐ Users can login to the app with valid email/password
+    ☐ Users cannot login to the app with a blank or missing email
+    ☐ Users cannot login to the app with a blank or incorrect password
+    ☐ There is a resource that can only be seen by logged in users
+    ☐ There is a resource that can only be seen by a specific user
+    ☐ There is a resource that has some links and content that only appears when logged in / for certain users
+  Authentication Security:
+    ☐ Password is hashed in the database using a slow-hashing algorithm @critical 
+    ☐ JWT is sent with `Authentication` header @high
+    ☐ Encryption keys are set in environment variables @critical 
+  Authentiaction:
+    ☐ Add auth router
+    ☐ Create user with POST /auth/register
+      ☐ validate required fields
+      ☐ Check if email is unique
+      ☐ hash password with bcrypt
+      ☐ insert into db
+    ☐ Login user with POST /auth/login
+      ☐ check if email in db
+      ☐ compare password with hashed password in db
+
+
+Archive:
+✔ You can archive finished todos here
+✔ Congratulations, you are now a Todo+ master!

@@ -17,7 +17,6 @@ import connectMongo from '../infra/db/mongo/connectMongo';
 /**
  * Configs.
  */
-import { API_VERSION } from '../config';
 
 class TsukiServer {
 
@@ -30,7 +29,6 @@ class TsukiServer {
   };
 
   private async config() {
-    console.log('Configuring Express...');
     this.Express.use(helmet());
     this.Express.use(cors());
     this.Express.use(compression());
@@ -44,10 +42,8 @@ class TsukiServer {
   };
 
   private initControllers(controllers: any[]) {
-    console.log('Initialinzing Controllers...');
-    controllers.forEach((el: any) => { // el is for Element of the "controllers" array.
-      console.log(`Initializing ${el.controller.path} route controller...`);
-      this.Express.use(`/api/v${API_VERSION}`, el.controller.router);
+    controllers.forEach((el: any) => { // el is the index for the "controllers" array.
+      this.Express.use(el.controller.router);
     });
   };
 
