@@ -1,8 +1,8 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { BaseController } from './base';
+import { BaseController } from '../base';
 
-class IndexController extends BaseController {
+class RootController extends BaseController {
   public path: string;
   public router: Router;
 
@@ -24,5 +24,4 @@ class IndexController extends BaseController {
     });
   }
 }
-
-export default new IndexController();
+export const controller = new RootController();

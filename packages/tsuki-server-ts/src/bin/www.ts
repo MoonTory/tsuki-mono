@@ -10,7 +10,7 @@ import http from 'http';
  * Local Module dependencies.
  */
 import Server from '../app';
-import { APP_PORT } from '../config'
+import { APP_PORT } from '../config';
 
 const main = async (): Promise<void> => {
 

@@ -11,7 +11,7 @@ import cookieParser from 'cookie-parser';
 /**
  * Local_Module dependencies.
  */
-import importControllers from '../api/utils/importControllers';
+import importControllers from '../infra/api/utils/importControllers';
 import connectMongo from '../infra/db/mongo/connectMongo';
 
 /**
@@ -40,14 +40,14 @@ class TsukiServer {
     this.Express.use(morgan('dev'));
 
     await connectMongo();
-    this.initControllers(await importControllers(['index', 'user']));
+    this.initControllers(await importControllers(['root', 'user']));
   };
 
-  private initControllers(controllers: any) {
+  private initControllers(controllers: any[]) {
     console.log('Initialinzing Controllers...');
-    controllers.forEach((controller: any) => {
-      console.log(`Initializing ${controller.default.path} route controller...`);
-      this.Express.use(`/api/v${API_VERSION}`, controller.default.router);
+    controllers.forEach((el: any) => { // el is for Element of the "controllers" array.
+      console.log(`Initializing ${el.controller.path} route controller...`);
+      this.Express.use(`/api/v${API_VERSION}`, el.controller.router);
     });
   };
 
