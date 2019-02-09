@@ -19,14 +19,13 @@ import connectMongo from '../infra/db/mongo/connectMongo';
  */
 
 class TsukiServer {
-
   public Express: Application;
 
   constructor() {
     this.Express = express();
 
     this.config();
-  };
+  }
 
   private async config() {
     this.Express.use(helmet());
@@ -39,14 +38,14 @@ class TsukiServer {
 
     await connectMongo();
     this.initControllers(await importControllers(['root', 'user']));
-  };
+  }
 
   private initControllers(controllers: any[]) {
-    controllers.forEach((el: any) => { // el is the index for the "controllers" array.
+    controllers.forEach((el: any) => {
+      // el is the index for the "controllers" array.
       this.Express.use(el.controller.router);
     });
-  };
-
+  }
 }
 
 export default new TsukiServer().Express;

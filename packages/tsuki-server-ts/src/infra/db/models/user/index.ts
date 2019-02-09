@@ -1,43 +1,46 @@
 import { Schema, Document, Model, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-import { IUser } from '../../../interfaces/user';
+import { IUser } from '../../../../domain/user';
 
 export interface IUserModel extends IUser, Document {
-	password?: string;
+  password?: string;
   hashPassword(passowrd: string): string;
   isValidPassword(): boolean;
 }
 
-export const UserSchema = new Schema({
-  method: {
-    type: String,
-    enum: ['local', 'google', 'facebook'],
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  username: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String
-  },
-  googleId: {
-    type: String
-  },
-  confirmed: {
+export const UserSchema = new Schema(
+  {
+    method: {
+      type: String,
+      enum: ['local', 'google', 'facebook'],
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    password: {
+      type: String
+    },
+    googleId: {
+      type: String
+    },
+    confirmed: {
       type: Boolean,
       default: false
+    }
+  },
+  {
+    timestamps: true
   }
-}, {
-  timestamps: true
-});
+);
 
-UserSchema.pre('save', async function (this: any, next) { 
+UserSchema.pre('save', async function(this: any, next) {
   try {
     if (this.method !== 'local') {
       next();
@@ -58,9 +61,8 @@ UserSchema.methods.hashPassword = async function(password: string) {
     // Generate a password hash (Salt + Hash)
     const passwordHash = await bcrypt.hash(password, salt);
 
-    // Save hashed password to the model to be stored in DB 
+    // Save hashed password to the model to be stored in DB
     return passwordHash;
-
   } catch (error) {
     throw new Error(error);
   }
@@ -69,7 +71,7 @@ UserSchema.methods.hashPassword = async function(password: string) {
 UserSchema.methods.isValidPassword = async function(newPassword: string) {
   try {
     return await bcrypt.compare(newPassword, this.password);
-  } catch(error) {
+  } catch (error) {
     throw new Error(error);
   }
 };

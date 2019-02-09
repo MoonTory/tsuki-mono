@@ -2,20 +2,20 @@ import { Router, Request, Response, NextFunction } from 'express';
 
 import { BaseController } from '../base';
 
-class RootController extends BaseController {
+class AuthController extends BaseController {
   public path: string;
   public router: Router;
 
   constructor() {
     super();
-    this.path = '/';
+    this.path = '/auth';
     this.router = Router();
 
     this.initializeRoutes();
   }
 
   public initializeRoutes() {
-    this.router.get(this.path, (req: Request, res: Response, next: NextFunction) => {
+    this.router.post(`${this.path}/register`, (req: Request, res: Response, next: NextFunction) => {
       res.status(200).json({
         payload: {
           message: `RootController handling ${req.method} to ${req.baseUrl + this.path}`
@@ -24,4 +24,4 @@ class RootController extends BaseController {
     });
   }
 }
-export const controller = new RootController();
+export const controller = new AuthController();

@@ -16,7 +16,7 @@ class UserController extends BaseController {
     this.initializeRoutes();
   }
 
-  protected async initializeRoutes() {
+  public async initializeRoutes() {
 
     this.router.get(this.path, async (req: Request, res: Response, next: NextFunction) => {
       
