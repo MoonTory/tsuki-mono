@@ -9,9 +9,10 @@ export default async (): Promise<void> => {
     mongoose.set('useFindAndModify', false);
     // Connect to MongoDB
     await mongoose.connect(MONGO_URI, { useNewUrlParser: true });
-    console.log('MongoDB Connected...'); 
+    console.log('MongoDB Connected...');
   } catch (exception) {
     // Log Exception
     console.error(exception);
+    throw exception;
   }
 };
