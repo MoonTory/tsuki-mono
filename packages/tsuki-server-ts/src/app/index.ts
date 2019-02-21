@@ -11,8 +11,9 @@ import cookieParser from 'cookie-parser';
 /**
  * Local_Module dependencies.
  */
-import importControllers from '../infra/api/utils/importControllers';
+import importControllers from '../infra/utils/importControllers';
 import connectMongo from '../infra/db/mongo/connectMongo';
+import { NODE_ENV } from '../config';
 
 /**
  * Configs.
@@ -34,14 +35,15 @@ class TsukiServer {
     this.Express.use(json());
     this.Express.use(urlencoded({ extended: false }));
     this.Express.use(cookieParser());
-    this.Express.use(morgan('dev'));
+    this.Express.use(morgan(NODE_ENV));
 
     await connectMongo();
-    this.initControllers(await importControllers(['root', 'user']));
+    this.initControllers(await importControllers(['root', 'user', 'auth']));
   }
 
   private initControllers(controllers: any[]) {
     controllers.forEach((el: any) => {
+      // I can also use this time to inject depencies to the controllers
       // el is the index for the "controllers" array.
       this.Express.use(el.controller.router);
     });
