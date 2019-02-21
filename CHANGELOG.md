@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/MoonTory/tsuki-monorepo/compare/v1.1.1...v1.1.2) (2019-02-21)
+
+
+### Bug Fixes
+
+* Edited tsconfig.json file ([0400783](https://github.com/MoonTory/tsuki-monorepo/commit/0400783))
+* Fixed bug with importControllers function ([280790d](https://github.com/MoonTory/tsuki-monorepo/commit/280790d))
+* Fixed issue were connecting to Mongo wouldn't throw error ([5f3c88f](https://github.com/MoonTory/tsuki-monorepo/commit/5f3c88f))
+* Fixed not using NODE_ENV env variable ([ba15279](https://github.com/MoonTory/tsuki-monorepo/commit/ba15279))
+
+
+
+
+
+
 ## [1.1.1](https://github.com/MoonTory/tsuki-monorepo/compare/v1.1.0...v1.1.1) (2019-01-30)
 
 **Note:** Version bump only for package tsuki
