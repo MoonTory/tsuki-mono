@@ -1,28 +1,25 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { BaseController } from '../base';
+import { BaseController } from '../../../domain/controller';
 // import { UserModel } from '../../../../infra/db/models/user';
 
-
-class UserController extends BaseController {
+class UserController implements BaseController {
   public path: string;
   public router: Router;
 
   constructor() {
-    super();
     this.path = '/user';
     this.router = Router();
 
     this.initializeRoutes();
+    console.log(this.path + ' Initialized successfully...');
   }
 
   public async initializeRoutes() {
-
     this.router.get(this.path, async (req: Request, res: Response, next: NextFunction) => {
-      
-    res.status(200).json({
+      res.status(200).json({
         payload: {
-          message: `handling ${req.method} to ${req.baseUrl + this.path}`
+          message: `UserController handling ${req.method} to ${req.baseUrl + this.path}`
         }
       });
     });

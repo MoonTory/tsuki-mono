@@ -1,17 +1,17 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { BaseController } from '../base';
+import { BaseController } from '../../../domain/controller';
 
-class RootController extends BaseController {
+class RootController implements BaseController {
   public path: string;
   public router: Router;
 
   constructor() {
-    super();
     this.path = '/';
     this.router = Router();
 
     this.initializeRoutes();
+    console.log(this.path + ' Initialized successfully...');
   }
 
   public initializeRoutes() {
