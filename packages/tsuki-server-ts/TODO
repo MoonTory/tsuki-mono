@@ -15,9 +15,9 @@ Todos:
     ✔ Password is hashed in the database using a slow-hashing algorithm @critical @done(19-02-05 17:38)
     ☐ JWT is parsed with `Authentication` header @high
     ✔ Encryption keys are set in environment variables @critical @done(19-02-05 17:38)
-  Authentiaction:
-    ☐ Add auth router @started(19-02-05 17:39)
-    ☐ Create user with POST /auth/register @started(19-02-05 17:39)
+  Authentication:
+    ☐ Add auth router 
+    ☐ Create user with POST /auth/register
       ☐ validate required fields
       ☐ Check if email is unique
       ☐ hash password with bcrypt
