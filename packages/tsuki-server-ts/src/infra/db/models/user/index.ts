@@ -1,13 +1,7 @@
-import { Schema, Document, Model, model } from 'mongoose';
+import { Schema, Model, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-import { IUser } from '../../../../domain/user';
-
-export interface IUserModel extends IUser, Document {
-  password?: string;
-  hashPassword(passowrd: string): string;
-  isValidPassword(): boolean;
-}
+import { IUserModel } from '../../../../domain/user';
 
 export const UserSchema = new Schema(
   {
