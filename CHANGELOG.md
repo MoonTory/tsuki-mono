@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/MoonTory/tsuki-monorepo/compare/v1.1.2...v1.2.0) (2019-02-25)
+
+
+### Bug Fixes
+
+* Cleaned up Entry point ([bb9ee86](https://github.com/MoonTory/tsuki-monorepo/commit/bb9ee86))
+* Fixed IController imports ([11388f8](https://github.com/MoonTory/tsuki-monorepo/commit/11388f8))
+* Fixed some setting in tsconfig.json ([7cadb7d](https://github.com/MoonTory/tsuki-monorepo/commit/7cadb7d))
+
+
+### Features
+
+* HTTP Singleton class for interfacing an http server ([99b4db9](https://github.com/MoonTory/tsuki-monorepo/commit/99b4db9))
+
+
+
+
+
 ## [1.1.2](https://github.com/MoonTory/tsuki-monorepo/compare/v1.1.1...v1.1.2) (2019-02-21)
 
 
