@@ -1,13 +1,13 @@
 import path from 'path';
-import { BaseController } from '../../../domain/controller';
+import { IController } from '../../../domain/controller';
 
-export default async function createControllerRoutes(modules: string[]): Promise<BaseController[]> {
+export default async function createControllerRoutes(modules: string[]): Promise<IController[]> {
   try {
-    const controllers: BaseController[] = [];
+    const controllers: IController[] = [];
 
     modules.forEach(controllerUri => {
       let controllerPath = path.resolve('src/interfaces/controllers/', controllerUri);
-      let controller: BaseController = require(controllerPath);
+      let controller: IController = require(controllerPath);
 
       controllers.push(controller);
     });

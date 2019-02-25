@@ -1,8 +1,8 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { BaseController } from '../../../domain/controller';
+import { IController } from '../../../domain/controller';
 
-class RootController implements BaseController {
+class RootController implements IController {
   public path: string;
   public router: Router;
 

@@ -1,9 +1,9 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { BaseController } from '../../../domain/controller';
+import { IController } from '../../../domain/controller';
 // import { UserModel } from '../../../../infra/db/models/user';
 
-class UserController implements BaseController {
+class UserController implements IController {
   public path: string;
   public router: Router;
 
