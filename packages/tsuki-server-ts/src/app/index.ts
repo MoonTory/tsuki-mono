@@ -1,7 +1,7 @@
 /**
  * Node_Module dependencies.
  */
-import express, { Application, urlencoded, json } from 'express';
+import express, { Application as ExpressApplication, urlencoded, json } from 'express';
 import compression from 'compression';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -14,16 +14,24 @@ import cookieParser from 'cookie-parser';
 import importControllers from '../infra/utils/importControllers';
 import connectMongo from '../infra/db/mongo/connectMongo';
 import { NODE_ENV } from '../config';
+import { IController } from '../domain/controller';
+import { TsukiHTTP } from '../interfaces/http';
 
 /**
  * Configs.
  */
 
-class TsukiServer {
-  public Express: Application;
+export class TsukiServer {
+  private port?: string | number | boolean = 5005;
+  public Express: ExpressApplication;
 
-  constructor() {
+  constructor(port?: string | number | boolean) {
+    this.port = port;
     this.Express = express();
+
+    if (port) {
+      this.Express.set('port', port);
+    }
 
     this.config();
   }
@@ -41,13 +49,16 @@ class TsukiServer {
     this.initControllers(await importControllers(['root', 'user', 'auth']));
   }
 
-  private initControllers(controllers: any[]) {
+  private initControllers(controllers: IController[]) {
     controllers.forEach((el: any) => {
-      // I can also use this time to inject depencies to the controllers
+      // I can also use this time to inject other depencies to the controllers
       // el is the index for the "controllers" array.
       this.Express.use(el.controller.router);
     });
   }
-}
 
-export default new TsukiServer().Express;
+  public async listen(): Promise<void> {
+    const http = TsukiHTTP.getInstance(this.port, this.Express);
+    await http.listen(this.port, () => console.log(`Server started @ http://localhost:${this.port}`));
+  }
+}
