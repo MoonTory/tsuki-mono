@@ -1,32 +1,65 @@
-Todos:
-  Explore the option of using JWT or Cookie base authentication, I am probably leaning towards using JWT,
-  for authentication mostly for the fact of already having prior experience in implementing.
+Research:
+  ☐ Research the Singleton Pattern
 
-  Core Auth Functionality:
-    ☐ Users can sign up for to the app with a unique email
-    ☐ Users cannot sign up for to the app with a duplicate email
-    ☐ Users can login to the app with valid email/password
-    ☐ Users cannot login to the app with a blank or missing email
-    ☐ Users cannot login to the app with a blank or incorrect password
-    ☐ There is a resource that can only be seen by logged in users
-    ☐ There is a resource that can only be seen by a specific user
-    ☐ There is a resource that has some links and content that only appears when logged in / for certain users
-  Authentication Security:
-    ✔ Password is hashed in the database using a slow-hashing algorithm @critical @done(19-02-05 17:38)
-    ☐ JWT is parsed with `Authentication` header @high
-    ✔ Encryption keys are set in environment variables @critical @done(19-02-05 17:38)
-  Authentication:
-    ☐ Add auth router 
-    ☐ Create user with POST /auth/register
-      ☐ validate required fields
-      ☐ Check if email is unique
-      ☐ hash password with bcrypt
-      ☐ insert into db
-    ☐ Login user with POST /auth/login
-      ☐ check if email in db
-      ☐ compare password with hashed password in db
+Logging:
 
+Architecture:
+  I need to look into what is the best practices in splitting up the my Typescript Interfaces & actual application
+  domains, e.g. ( User )
+    Would also been useful if I look into making this whole thing into a Microservice architecture, that way I can
+    implement different parts of the application without worrying about messing with anothing service. An example of
+    this would be that I would have an Auth service & a CMS service. This will most likley cause me way more headaches
+    than I need right now, but the benefits are worth considering.
+  ✔ Clean up the application entry point @done(19-02-25 01:01)
+  ✔ Create HTTP (Factory || Singleton) class @done(19-02-25 01:02)
+    As for the Node.Js HTTP server, will probably make it factory method that returns a server configured with our
+    express instance inside of the TsukiServer. Another option I guess would also make it a Singleton since we will only
+    have one instance of an http server. I guess, I have no idea if it would a good idea to be able to instantiate
+    multiple servers, as I think Express would crash.
+      I ended up implementing it as a Singleton Class, and it worked perfectly! For now atleast, I will keep an eye out
+      if this causes any other trouble
+  ✔ Move all server configuration inside on TsukiServer @done(19-02-25 01:03)
+    I am thinking about refactoring the main TsukiServer class, and seperating the node http server as an individual
+    interface that TsukiServer configures internally. That way when instantiating a new TsukiServer, it will look
+    cleaner as we will only need to optionally supply it with a 'port' number, otherwise it will default to a preset.
 
-Archive:
-✔ You can archive finished todos here
-✔ Congratulations, you are now a Todo+ master!
+API:
+  ☐ Implement TsukiAPI
+    The TsukiAPI will be a Singleton class so that there is only one instance of the class in the application.
+  ✔ Implement IController Interface @done(19-02-25 01:03)
+    Would making it an Abstract Class better? If not why?
+  ☐ Implement IRouter Interface
+    Would making it an Abstract Class better? If not why?
+
+Redis:
+  Will need to look into the Singleton pattern, I am considering implementing it for the Redis client. That way the
+  whole application can use the same Redis client thus eliminating the need to instantiate a new instance.
+  ☐ Set up a Redis Client
+  ☐ Implement prototype class
+
+Core Auth Functionality:
+  ☐ Users can sign up for to the app with a unique email
+  ☐ Users cannot sign up for to the app with a duplicate email
+  ☐ Users can login to the app with valid email/password
+  ☐ Users cannot login to the app with a blank or missing email
+  ☐ Users cannot login to the app with a blank or incorrect password
+  ☐ There is a resource that can only be seen by logged in users
+  ☐ There is a resource that can only be seen by a specific user
+  ☐ There is a resource that has some links and content that only appears when logged in /forcertain users
+  
+Authentication Security:
+Explore the option of using JWT or Cookie base authentication, I am probably leaning towardsusing JWT,
+for authentication mostly for the fact of already having prior experience in implementing.
+  ✔ Password is hashed in the database using a slow-hashing algorithm @critical @done(19-02-0517:38)
+  ☐ JWT is parsed with `Authentication` header @high
+  ✔ Encryption keys are set in environment variables @critical @done(19-02-05 17:38)
+Authentication:
+  ☐ Add auth router 
+  ☐ Create user with POST /auth/register
+    ☐ validate required fields
+    ☐ Check if email is unique
+    ☐ hash password with bcrypt
+    ☐ insert into db
+  ☐ Login user with POST /auth/login
+    ☐ check if email in db
+    ☐ compare password with hashed password in db
