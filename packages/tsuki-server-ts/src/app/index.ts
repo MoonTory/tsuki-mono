@@ -11,11 +11,10 @@ import cookieParser from 'cookie-parser';
 /**
  * Local_Module dependencies.
  */
-import importControllers from '../infra/utils/importControllers';
-import connectMongo from '../infra/db/mongo/connectMongo';
-import { NODE_ENV } from '../config';
-import { IController } from '../domain/controller';
+import { connectMongo } from '../infra/db/mongo/connectMongo';
+import { NODE_ENV, MONGO_URI } from '../config';
 import { TsukiHTTP } from '../interfaces/http';
+import { TsukiAPI } from '../interfaces/api';
 
 /**
  * Configs.
@@ -23,7 +22,8 @@ import { TsukiHTTP } from '../interfaces/http';
 
 export class TsukiServer {
   private port?: string | number | boolean = 5005;
-  public Express: ExpressApplication;
+  private Express: ExpressApplication;
+  private api: TsukiAPI = TsukiAPI.getInstance();
 
   constructor(port?: string | number | boolean) {
     this.port = port;
@@ -45,16 +45,9 @@ export class TsukiServer {
     this.Express.use(cookieParser());
     this.Express.use(morgan(NODE_ENV));
 
-    await connectMongo();
-    this.initControllers(await importControllers(['root', 'user', 'auth']));
-  }
+    await connectMongo(MONGO_URI);
 
-  private initControllers(controllers: IController[]) {
-    controllers.forEach((el: any) => {
-      // I can also use this time to inject other depencies to the controllers
-      // el is the index for the "controllers" array.
-      this.Express.use(el.controller.router);
-    });
+    this.Express.use(this.api.router);
   }
 
   public async listen(): Promise<void> {
