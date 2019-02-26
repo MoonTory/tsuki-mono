@@ -6,7 +6,7 @@ Research:
     should probably brush up on my knowledge.
 
 Database:
-  Need to research the best desgin pattern to desgin a driver over the mongoose orm, this 'class' will act as an
+  Need to research the best desgin pattern to desgin a class over the mongoose orm, this 'class' will act as an
   interface, so that it can handle the 'one' and 'only' connection to the database.
     I was thinking about making it a Singleton, but I don't think that will come in handy to use the connection to look
     for different models in the db.
@@ -14,6 +14,9 @@ Database:
 
 
 Logging:
+  ☐ Look into different logging solutions
+    Currently off the top of my head, the Winston logger comes to mind. I have never worked with it, but I have seen
+    this package's name float around in some articles, and I have seen some codebases that use it.
 
 Architecture:
   I need to look into what is the best practices in splitting up the my Typescript Interfaces & actual application
