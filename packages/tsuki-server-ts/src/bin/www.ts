@@ -6,7 +6,7 @@ import { APP_PORT } from '../config';
 
 const main = async (): Promise<void> => {
   /**
-   * Get port from environment and store in Express.
+   * Get port from environment and initialize TsukiServer.
    */
   const port = normalizePort(APP_PORT);
   const app = new TsukiServer(port);
