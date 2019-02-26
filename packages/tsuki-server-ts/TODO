@@ -1,17 +1,29 @@
 Research:
-  ☐ Research the Singleton Pattern
+  ✔ Research the Singleton Pattern @done(19-02-25 22:50)
+  ☐ Research the Repository Pattern 
+    I've read briefly about this pattern a couple of weeks ago, I should probably try to find the article that I read,
+    it was most likely a article about 'Domain Driven Design'. Although that is a whole other topic on it's own, I
+    should probably brush up on my knowledge.
+
+Database:
+  Need to research the best desgin pattern to desgin a driver over the mongoose orm, this 'class' will act as an
+  interface, so that it can handle the 'one' and 'only' connection to the database.
+    I was thinking about making it a Singleton, but I don't think that will come in handy to use the connection to look
+    for different models in the db.
+      One idea is to make it an inheritable class so that I can make 'repo' to manage each model in the collection.
+
 
 Logging:
 
 Architecture:
   I need to look into what is the best practices in splitting up the my Typescript Interfaces & actual application
   domains, e.g. ( User )
-    Would also been useful if I look into making this whole thing into a Microservice architecture, that way I can
-    implement different parts of the application without worrying about messing with anothing service. An example of
-    this would be that I would have an Auth service & a CMS service. This will most likley cause me way more headaches
-    than I need right now, but the benefits are worth considering.
+  Would also been useful if I look into making this whole thing into a Microservice architecture, that way I can
+  implement different parts of the application without worrying about messing with anothing service. An example of
+  this would be that I would have an Auth service & a CMS service. This will most likley cause me way more headaches
+  than I need right now, but the benefits are worth considering.
   ✔ Clean up the application entry point @done(19-02-25 01:01)
-  ✔ Create HTTP (Factory || Singleton) class @done(19-02-25 01:02)
+  ✔ Create HTTP (Singleton) class @done(19-02-25 01:02)
     As for the Node.Js HTTP server, will probably make it factory method that returns a server configured with our
     express instance inside of the TsukiServer. Another option I guess would also make it a Singleton since we will only
     have one instance of an http server. I guess, I have no idea if it would a good idea to be able to instantiate
@@ -24,11 +36,11 @@ Architecture:
     cleaner as we will only need to optionally supply it with a 'port' number, otherwise it will default to a preset.
 
 API:
-  ☐ Implement TsukiAPI
+  ✔ Implement TsukiAPI @done(19-02-25 22:50)
     The TsukiAPI will be a Singleton class so that there is only one instance of the class in the application.
   ✔ Implement IController Interface @done(19-02-25 01:03)
     Would making it an Abstract Class better? If not why?
-  ☐ Implement IRouter Interface
+  ✔ Implement IRouter Interface @done(19-02-25 22:50)
     Would making it an Abstract Class better? If not why?
 
 Redis:
@@ -47,19 +59,20 @@ Core Auth Functionality:
   ☐ There is a resource that can only be seen by a specific user
   ☐ There is a resource that has some links and content that only appears when logged in /forcertain users
   
-Authentication Security:
-Explore the option of using JWT or Cookie base authentication, I am probably leaning towardsusing JWT,
-for authentication mostly for the fact of already having prior experience in implementing.
-  ✔ Password is hashed in the database using a slow-hashing algorithm @critical @done(19-02-0517:38)
-  ☐ JWT is parsed with `Authentication` header @high
-  ✔ Encryption keys are set in environment variables @critical @done(19-02-05 17:38)
-Authentication:
-  ☐ Add auth router 
-  ☐ Create user with POST /auth/register
-    ☐ validate required fields
-    ☐ Check if email is unique
-    ☐ hash password with bcrypt
-    ☐ insert into db
-  ☐ Login user with POST /auth/login
-    ☐ check if email in db
-    ☐ compare password with hashed password in db
+  Authentication Security:
+    Explore the option of using JWT or Cookie base authentication, I am probably leaning towardsusing JWT,
+    for authentication mostly for the fact of already having prior experience in implementing.
+    ✔ Password is hashed in the database using a slow-hashing algorithm @critical @done(19-02-0517:38)
+    ☐ JWT is parsed with `Authentication` header @high
+    ✔ Encryption keys are set in environment variables @critical @done(19-02-05 17:38)
+
+  Authentication:
+    ☐ Add auth router 
+    ☐ Create user with POST /auth/register
+      ☐ validate required fields
+      ☐ Check if email is unique
+      ☐ hash password with bcrypt
+      ☐ insert into db
+    ☐ Login user with POST /auth/login
+      ☐ check if email in db
+      ☐ compare password with hashed password in db
