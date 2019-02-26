@@ -1,15 +1,15 @@
 /**
  * Local Module dependencies.
  */
-import { TsukiServer } from '../app';
-import { APP_PORT } from '../config';
+import { TsukiApplication } from '../app';
+import * as config from '../config';
 
 const main = async (): Promise<void> => {
   /**
    * Get port from environment and initialize TsukiServer.
    */
-  const port = normalizePort(APP_PORT);
-  const app = new TsukiServer(port);
+  const port = normalizePort(config.APP_PORT);
+  const app = new TsukiApplication(config, port);
 
   /**
    * Listen on http.
