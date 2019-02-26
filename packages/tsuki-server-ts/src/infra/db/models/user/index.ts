@@ -40,6 +40,7 @@ UserSchema.pre('save', async function(this: any, next) {
       next();
     }
 
+    // Save hashed password to the model to be stored in DB
     this.password = await this.hashPassword(this.password);
     next();
   } catch (error) {
@@ -55,16 +56,16 @@ UserSchema.methods.hashPassword = async function(password: string) {
     // Generate a password hash (Salt + Hash)
     const passwordHash = await bcrypt.hash(password, salt);
 
-    // Save hashed password to the model to be stored in DB
+    // Return hashed password
     return passwordHash;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-UserSchema.methods.isValidPassword = async function(newPassword: string) {
+UserSchema.methods.isValidPassword = async function(testPassword: string) {
   try {
-    return await bcrypt.compare(newPassword, this.password);
+    return await bcrypt.compare(testPassword, this.password);
   } catch (error) {
     throw new Error(error);
   }

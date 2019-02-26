@@ -1,26 +1,22 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { IRouter } from '../../../domain/router';
-// import { IController } from '../../../domain/controller';
+import { IRouter } from '../../../../domain/http/router';
+import { IController } from '../../../../domain/http/controller';
 // import { importRouters } from '../../../infra/utils/importRouters';
 
 export default class AuthRouter implements IRouter {
-  private path: string;
-  // private controllers: IController[];
+  public path: string;
   public router: Router;
+  public controllers: IController[];
 
   constructor(path: string) {
     this.path = '/' + path;
     this.router = Router();
 
-    this.config();
+    this.init();
   }
 
-  private async config() {
-    // this.controllers = await importRouters();
-
-    // console.log('this.controllers', this.controllers);
-
+  private async init() {
     this.router.get(this.path, (req: Request, res: Response, next: NextFunction) => {
       res.status(200).json({
         message: 'Initialized Successfully!'

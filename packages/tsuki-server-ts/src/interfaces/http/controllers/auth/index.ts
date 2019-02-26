@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { IController } from '../../../domain/controller';
+import { IController } from '../../../../domain/http/controller';
 
 class AuthController implements IController {
   public path: string;

@@ -1,19 +1,18 @@
 import { Router } from 'express';
 
-import { importRouters } from '../../infra/utils/importRouters';
-import { IRouter } from '../../domain/router';
+import { importRouters } from '../../../infra/utils/importRouters';
+import { IRouter } from '../../../domain/http/router';
 
 export class TsukiAPI {
   private static _instance: TsukiAPI;
-  private path: string;
+  private readonly path: string = '/api';
   public router: Router;
 
   private constructor() {
     this.config();
   }
 
-  private async config(): Promise<void> {
-    this.path = '/api';
+  private async config() {
     this.router = Router();
 
     this.initialize(await importRouters());
@@ -28,7 +27,6 @@ export class TsukiAPI {
   public static getInstance(): TsukiAPI {
     if (!TsukiAPI._instance) {
       TsukiAPI._instance = new TsukiAPI();
-      // ... any one time initialization goes here ...
     }
     return TsukiAPI._instance;
   }

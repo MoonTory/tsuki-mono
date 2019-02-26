@@ -2,8 +2,8 @@ import debug from 'debug';
 import { Application as ExpressApplication } from 'express';
 import { Server as httpServer } from 'http';
 
-export class TsukiHTTP extends httpServer {
-  private static _instance: TsukiHTTP;
+export class TsukiServer extends httpServer {
+  private static _instance: TsukiServer;
   private port?: string | number | boolean;
 
   private constructor(port?: string | number | boolean, express?: ExpressApplication) {
@@ -15,12 +15,12 @@ export class TsukiHTTP extends httpServer {
     this.on('listening', this.onListening);
   }
 
-  public static getInstance(port?: string | number | boolean, express?: ExpressApplication): TsukiHTTP {
-    if (!TsukiHTTP._instance) {
-      TsukiHTTP._instance = new TsukiHTTP(port, express);
+  public static getInstance(port?: string | number | boolean, express?: ExpressApplication): TsukiServer {
+    if (!TsukiServer._instance) {
+      TsukiServer._instance = new TsukiServer(port, express);
       // ... any one time initialization goes here ...
     }
-    return TsukiHTTP._instance;
+    return TsukiServer._instance;
   }
 
   /**

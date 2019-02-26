@@ -1,16 +1,16 @@
 import { readdirSync, statSync } from 'fs';
 import path, { join } from 'path';
 
-import { IRouter } from '../../../domain/router';
+import { IRouter } from '../../../domain/http/router';
 
 export const importRouters = async (): Promise<IRouter[]> => {
   try {
-    const modules: string[] = await parseDirFolderNames('src/interfaces/routers/');
+    const modules: string[] = await parseDirFolderNames('src/interfaces/http/routers/');
 
     const routers: IRouter[] = [];
 
     modules.forEach(routerURI => {
-      let dirPath: string = 'src/interfaces/routers/' + routerURI;
+      let dirPath: string = 'src/interfaces/http/routers/' + routerURI;
       let routerPath: string = path.resolve(dirPath);
       let Router = require(routerPath);
       let router = new Router.default(routerURI);
