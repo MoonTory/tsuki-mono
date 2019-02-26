@@ -28,8 +28,6 @@ export class TsukiServer {
 
     this.http = TsukiHttp.getInstance(this.config.APP_PORT, this.express);
     this.api = TsukiAPI.getInstance();
-
-    this.init();
   }
 
   public static getInstance(config: any): TsukiServer {
@@ -44,7 +42,7 @@ export class TsukiServer {
     await this.http.listen(this.http.port, () => console.log(`Server start @ http://localhost:${this.http.port} ...`));
   }
 
-  private init() {
+  public async init() {
     this.express.use(helmet());
     this.express.use(cors());
     this.express.use(compression());
@@ -54,5 +52,7 @@ export class TsukiServer {
     this.express.use(morgan(this.config.NODE_ENV));
 
     this.express.use(this.api.router);
+
+    await this.listen();
   }
 }
