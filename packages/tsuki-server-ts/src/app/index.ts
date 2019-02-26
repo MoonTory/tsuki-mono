@@ -12,46 +12,47 @@ import cookieParser from 'cookie-parser';
  * Local_Module dependencies.
  */
 import { connectMongo } from '../infra/db/mongo/connectMongo';
-import { NODE_ENV, MONGO_URI } from '../config';
-import { TsukiHTTP } from '../interfaces/http';
-import { TsukiAPI } from '../interfaces/api';
+import { TsukiServer } from '../interfaces/http';
+import { TsukiAPI } from '../interfaces/http/api';
 
 /**
  * Configs.
  */
 
-export class TsukiServer {
+export class TsukiApplication {
   private port?: string | number | boolean = 5005;
-  private Express: ExpressApplication;
+  private express: ExpressApplication;
   private api: TsukiAPI = TsukiAPI.getInstance();
+  private config: any;
 
-  constructor(port?: string | number | boolean) {
+  constructor(config: any, port?: string | number | boolean) {
+    this.config = config;
     this.port = port;
-    this.Express = express();
+    this.express = express();
 
     if (port) {
-      this.Express.set('port', port);
+      this.express.set('port', port);
     }
 
-    this.config();
+    this.init();
   }
 
-  private async config() {
-    this.Express.use(helmet());
-    this.Express.use(cors());
-    this.Express.use(compression());
-    this.Express.use(json());
-    this.Express.use(urlencoded({ extended: false }));
-    this.Express.use(cookieParser());
-    this.Express.use(morgan(NODE_ENV));
+  private async init() {
+    this.express.use(helmet());
+    this.express.use(cors());
+    this.express.use(compression());
+    this.express.use(json());
+    this.express.use(urlencoded({ extended: false }));
+    this.express.use(cookieParser());
+    this.express.use(morgan(this.config.NODE_ENV));
 
-    await connectMongo(MONGO_URI);
+    await connectMongo(this.config.MONGO_URI);
 
-    this.Express.use(this.api.router);
+    this.express.use(this.api.router);
   }
 
   public async listen(): Promise<void> {
-    const http = TsukiHTTP.getInstance(this.port, this.Express);
+    const http = TsukiServer.getInstance(this.port, this.express);
     await http.listen(this.port, () => console.log(`Server started @ http://localhost:${this.port}`));
   }
 }
