@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/MoonTory/tsuki-monorepo/compare/v1.2.0...v1.2.1) (2019-02-26)
+
+
+### Bug Fixes
+
+* Cleaned up user model ([b068cac](https://github.com/MoonTory/tsuki-monorepo/commit/b068cac))
+* Fixed dynamic route importing ([e0c4aa6](https://github.com/MoonTory/tsuki-monorepo/commit/e0c4aa6))
+* Fixed folder structure ([9b4e56e](https://github.com/MoonTory/tsuki-monorepo/commit/9b4e56e))
+* Fixed import of config ([caceeac](https://github.com/MoonTory/tsuki-monorepo/commit/caceeac))
+* Fixed Mongo Connection Function ([3cb1812](https://github.com/MoonTory/tsuki-monorepo/commit/3cb1812))
+* Fixed naming conflict ([a388909](https://github.com/MoonTory/tsuki-monorepo/commit/a388909))
+* Moved helper functions to interfaces/http directory ([d97134c](https://github.com/MoonTory/tsuki-monorepo/commit/d97134c))
+
+
+
+
+
 # [1.2.0](https://github.com/MoonTory/tsuki-monorepo/compare/v1.1.2...v1.2.0) (2019-02-25)
 
 

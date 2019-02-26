@@ -1,6 +1,6 @@
 {
   "name": "@tsuki/server-ts",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Tsuki Server",
   "main": "index.js",
   "author": "Gustavo Quinta - MoonTory",
