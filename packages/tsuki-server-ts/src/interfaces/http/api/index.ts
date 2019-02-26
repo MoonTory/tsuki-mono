@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { importRouters } from '../helpers/importRouters';
-import { IRouter } from '../../../domain/http/router';
+import { IRouter } from '../../../typings/http/router';
 
 export class TsukiAPI {
   private static _instance: TsukiAPI;

@@ -1,5 +1,5 @@
 import path from 'path';
-import { IController } from '../../../../domain/http/controller';
+import { IController } from '../../../../typings/http/controller';
 
 export default async function createControllerRoutes(modules: string[]): Promise<IController[]> {
   try {

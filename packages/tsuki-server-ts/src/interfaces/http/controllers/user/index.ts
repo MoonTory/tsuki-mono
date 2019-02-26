@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { IController } from '../../../domain/controller';
+import { IController } from '../../../../typings/http/controller';
 // import { UserModel } from '../../../../infra/db/models/user';
 
 class UserController implements IController {

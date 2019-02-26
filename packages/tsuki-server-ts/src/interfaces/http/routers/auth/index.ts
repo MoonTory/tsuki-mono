@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { IRouter } from '../../../../domain/http/router';
-import { IController } from '../../../../domain/http/controller';
+import { IRouter } from '../../../../typings/http/router';
+import { IController } from '../../../../typings/http/controller';
 // import { importRouters } from '../../../infra/utils/importRouters';
 
 export default class AuthRouter implements IRouter {

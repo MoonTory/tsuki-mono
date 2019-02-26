@@ -1,7 +1,7 @@
 import { readdirSync, statSync } from 'fs';
 import path, { join } from 'path';
 
-import { IRouter } from '../../../../domain/http//router';
+import { IRouter } from '../../../../typings/http/router';
 
 export const importRouters = async (): Promise<IRouter[]> => {
   try {
