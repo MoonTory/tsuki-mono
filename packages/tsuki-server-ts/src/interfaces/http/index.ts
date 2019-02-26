@@ -1,58 +1,58 @@
-import debug from 'debug';
-import { Application as ExpressApplication } from 'express';
-import { Server as httpServer } from 'http';
+/**
+ * Node_Module dependencies.
+ */
+import express, { Application as ExpressApplication, urlencoded, json } from 'express';
+import compression from 'compression';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
-export class TsukiServer extends httpServer {
+import { TsukiHttp } from './server';
+import { TsukiAPI } from './api';
+
+export class TsukiServer {
   private static _instance: TsukiServer;
-  private port?: string | number | boolean;
+  private http: TsukiHttp;
+  private api: TsukiAPI;
+  private express: ExpressApplication;
+  private config: any;
 
-  private constructor(port?: string | number | boolean, express?: ExpressApplication) {
-    super(express);
+  private constructor(config: any) {
+    this.config = config;
+    this.express = express();
 
-    this.port = port;
+    if (this.config.APP_PORT) {
+      this.express.set('port', this.config.APP_PORT);
+    }
 
-    this.on('error', this.onError);
-    this.on('listening', this.onListening);
+    this.http = TsukiHttp.getInstance(this.config.APP_PORT, this.express);
+    this.api = TsukiAPI.getInstance();
+
+    this.init();
   }
 
-  public static getInstance(port?: string | number | boolean, express?: ExpressApplication): TsukiServer {
+  public static getInstance(config: any): TsukiServer {
     if (!TsukiServer._instance) {
-      TsukiServer._instance = new TsukiServer(port, express);
+      TsukiServer._instance = new TsukiServer(config);
       // ... any one time initialization goes here ...
     }
     return TsukiServer._instance;
   }
 
-  /**
-   * Event listener for HTTP server "error" event.
-   */
-
-  private onError(error: NodeJS.ErrnoException): void {
-    if (error.syscall !== 'listen') {
-      throw error;
-    }
-    const bind = typeof this.port === 'string' ? 'Pipe ' + this.port : 'Port ' + this.port;
-    switch (error.code) {
-      case 'EACCES':
-        console.error(`${bind} requires elevated privileges`);
-        process.exit(1);
-        break;
-      case 'EADDRINUSE':
-        console.error(`${bind} is already in use`);
-        process.exit(1);
-        break;
-      default:
-        throw error;
-    }
+  public async listen() {
+    await this.http.listen(this.http.port, () => console.log(`Server start @ http://localhost:${this.http.port} ...`));
   }
 
-  /**
-   * Event listener for HTTP server "listening" event.
-   */
+  private init() {
+    this.express.use(helmet());
+    this.express.use(cors());
+    this.express.use(compression());
+    this.express.use(json());
+    this.express.use(urlencoded({ extended: false }));
+    this.express.use(cookieParser());
+    this.express.use(morgan(this.config.NODE_ENV));
 
-  private onListening(): void {
-    const addr = this.address();
-    const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-    debug(`Listening on ${bind}`);
+    this.express.use(this.api.router);
   }
 }
