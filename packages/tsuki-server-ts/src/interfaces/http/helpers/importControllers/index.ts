@@ -10,7 +10,7 @@ export async function importAllControllers(): Promise<IController[]> {
     const controllers: IController[] = [];
 
     modules.forEach(controllerURI => {
-      let dirPath: string = 'src/interfaces/http/routers/' + controllerURI;
+      let dirPath: string = 'src/interfaces/http/controllers/' + controllerURI;
       let controllerPath: string = path.resolve(dirPath);
       let Controller = require(controllerPath);
       let controller = new Controller.default(controllerURI);
