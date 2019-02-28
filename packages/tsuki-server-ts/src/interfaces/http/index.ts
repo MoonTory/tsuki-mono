@@ -1,7 +1,7 @@
 /**
  * Node_Module dependencies.
  */
-import express, { Application as ExpressApplication, urlencoded, json } from 'express';
+import express, { urlencoded, json } from 'express';
 import compression from 'compression';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -15,7 +15,7 @@ export class TsukiServer {
   private static _instance: TsukiServer;
   private http: TsukiHttp;
   private api: TsukiAPI;
-  private express: ExpressApplication;
+  private express: express.Application;
   private config: any;
 
   private constructor(config: any) {
