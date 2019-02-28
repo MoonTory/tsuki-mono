@@ -5,7 +5,7 @@ import { parseDirFolderNames } from '../parseDirFolderNames';
 
 export async function importAllControllers(): Promise<IController[]> {
   try {
-    const modules: string[] = await parseDirFolderNames('src/interfaces/http/routers/');
+    const modules: string[] = await parseDirFolderNames('src/interfaces/http/controllers/');
 
     const controllers: IController[] = [];
 
