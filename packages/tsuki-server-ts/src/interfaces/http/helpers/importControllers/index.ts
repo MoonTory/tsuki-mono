@@ -3,7 +3,7 @@ import path from 'path';
 import { IController } from '../../../../typings/http/controller';
 import { parseDirFolderNames } from '../parseDirFolderNames';
 
-export async function importAllControllers(): Promise<IController[]> {
+export const importAllControllers = async (): Promise<IController[]> => {
   try {
     const modules: string[] = await parseDirFolderNames('src/interfaces/http/controllers/');
 
@@ -21,7 +21,7 @@ export async function importAllControllers(): Promise<IController[]> {
   } catch (error) {
     throw error;
   }
-}
+};
 
 export const importController = (controllerUri: string) => {
   try {
