@@ -1,7 +1,7 @@
-import { readdirSync, statSync } from 'fs';
-import path, { join } from 'path';
+import path from 'path';
 
 import { IRouter } from '../../../../typings/http/router';
+import { parseDirFolderNames } from '../parseDirFolderNames';
 
 export const importRouters = async (): Promise<IRouter[]> => {
   try {
@@ -22,10 +22,3 @@ export const importRouters = async (): Promise<IRouter[]> => {
     throw error;
   }
 };
-
-// Helper function to get directory names from a specified path
-// @params -> pathName: string
-// Provide a pathName in string format to the directory in which you want to parse the folders of.
-
-const parseDirFolderNames = (pathName: string): string[] =>
-  readdirSync(pathName).filter((dirName: string) => statSync(join(pathName, dirName)).isDirectory());
