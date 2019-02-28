@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { importRouters } from '../helpers/importRouters';
-import { IRouter } from '../../../typings/http/router';
+import { IController } from '../../../typings/http/controller';
+import { importAllControllers } from '../helpers/importControllers';
 
 export class TsukiAPI {
   private static _instance: TsukiAPI;
@@ -15,11 +15,11 @@ export class TsukiAPI {
   private async config() {
     this.router = Router();
 
-    this.initialize(await importRouters());
+    this.initialize(await importAllControllers());
   }
 
-  private initialize(routers: IRouter[]) {
-    routers.forEach((el: IRouter) => {
+  private initialize(controllers: IController[]) {
+    controllers.forEach((el: IController) => {
       this.router.use(this.path, el.router);
     });
   }

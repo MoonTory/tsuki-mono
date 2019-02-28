@@ -1,27 +1,21 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 import { IController } from '../../../../typings/http/controller';
 
-class AuthController implements IController {
-  public path: string;
-  public router: Router;
+export default class AuthController extends IController {
+  constructor(path: string) {
+    super(path);
+    this.init();
+  }
 
-  constructor() {
-    this.path = '/auth';
-    this.router = Router();
-
-    this.initializeRoutes();
+  public async init() {
+    this.router.get(this.path + '/register', this.register);
     console.log(this.path + ' Initialized successfully...');
   }
 
-  public initializeRoutes() {
-    this.router.post(`/register`, (req: Request, res: Response, next: NextFunction) => {
-      res.status(200).json({
-        payload: {
-          message: `AuthController handling ${req.method} to ${req.baseUrl + this.path}`
-        }
-      });
+  private register = async (req: Request, res: Response, next: NextFunction) => {
+    res.status(200).json({
+      debug: `This is the register route @ ${req.baseUrl + req.url}`
     });
-  }
+  };
 }
-export const controller = new AuthController();
