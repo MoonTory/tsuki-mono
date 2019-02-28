@@ -45,6 +45,10 @@ API:
     Would making it an Abstract Class better? If not why?
   ✔ Implement IRouter Interface @done(19-02-25 22:50)
     Would making it an Abstract Class better? If not why?
+      I ended up refactoring, and completely got rid of the Router classes from the application. Now the application
+      only uses IControllers, where it handles it's own routing, thus making the flexibility of using custom middleware
+      functions. I could have probably found another work around, but this seems more simple and more elegant. I may
+      come back to this if I ever come into any problems with the current solution.
 
 Redis:
   Will need to look into the Singleton pattern, I am considering implementing it for the Redis client. That way the
