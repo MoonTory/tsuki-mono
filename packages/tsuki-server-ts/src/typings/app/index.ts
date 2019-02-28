@@ -1,7 +1,7 @@
 import { IConfig } from '../config';
 import { TsukiDB } from '../../infra/db';
 
-export type IAppData = {
+export interface IAppData {
   config: IConfig;
   database: TsukiDB.MongoDB;
 };
