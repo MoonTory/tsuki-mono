@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/MoonTory/tsuki-monorepo/compare/v1.2.1...v1.2.2) (2019-02-28)
+
+
+### Bug Fixes
+
+* Extracted parseDirFolderNames functoin to seperate file ([68508b0](https://github.com/MoonTory/tsuki-monorepo/commit/68508b0))
+* Fixed importAllControllers function name ([00847b9](https://github.com/MoonTory/tsuki-monorepo/commit/00847b9))
+* Fixed initilize method on TsukiServer ([1daa6e7](https://github.com/MoonTory/tsuki-monorepo/commit/1daa6e7))
+* Fixed routing and controllers ([72c819a](https://github.com/MoonTory/tsuki-monorepo/commit/72c819a))
+* Importing controllers from the wrong path ([302ef2b](https://github.com/MoonTory/tsuki-monorepo/commit/302ef2b))
+* Moved typescript types & interfaces into 'typings' folder ([090484b](https://github.com/MoonTory/tsuki-monorepo/commit/090484b))
+* Reading from the wrong directory ([745a079](https://github.com/MoonTory/tsuki-monorepo/commit/745a079))
+
+
+
+
+
 ## [1.2.1](https://github.com/MoonTory/tsuki-monorepo/compare/v1.2.0...v1.2.1) (2019-02-26)
 
 
