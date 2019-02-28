@@ -2,19 +2,23 @@ import { Router } from 'express';
 
 import { IController } from '../../../typings/http/controller';
 import { importAllControllers } from '../helpers/importControllers';
+import { TsukiDB } from '../../../infra/db';
 
 export class TsukiAPI {
   private static _instance: TsukiAPI;
   private readonly path: string = '/api';
+  private database: TsukiDB.MongoDB;
   public router: Router;
 
-  private constructor() {
+  private constructor(database: TsukiDB.MongoDB) {
+    this.database = database;
+
     this.config();
   }
 
   private async config() {
     this.router = Router();
-
+    this.database.print(); // This is just to test the function, otherwise ts give unused error
     this.initialize(await importAllControllers());
   }
 
@@ -24,9 +28,9 @@ export class TsukiAPI {
     });
   }
 
-  public static getInstance(): TsukiAPI {
+  public static getInstance(database: TsukiDB.MongoDB): TsukiAPI {
     if (!TsukiAPI._instance) {
-      TsukiAPI._instance = new TsukiAPI();
+      TsukiAPI._instance = new TsukiAPI(database);
     }
     return TsukiAPI._instance;
   }

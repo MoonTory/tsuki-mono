@@ -10,15 +10,17 @@ import cookieParser from 'cookie-parser';
 
 import { TsukiHttp } from './server';
 import { TsukiAPI } from './api';
+import { IConfig } from '../../typings/config';
+import { IAppData } from '../../typings/app';
 
 export class TsukiServer {
   private static _instance: TsukiServer;
   private http: TsukiHttp;
   private api: TsukiAPI;
   private express: express.Application;
-  private config: any;
+  private config: IConfig;
 
-  private constructor(config: any) {
+  private constructor({ config, database }: IAppData) {
     this.config = config;
     this.express = express();
 
@@ -27,18 +29,18 @@ export class TsukiServer {
     }
 
     this.http = TsukiHttp.getInstance(this.config.APP_PORT, this.express);
-    this.api = TsukiAPI.getInstance();
+    this.api = TsukiAPI.getInstance(database);
   }
 
-  public static getInstance(config: any): TsukiServer {
+  public static getInstance(appData: IAppData): TsukiServer {
     if (!TsukiServer._instance) {
-      TsukiServer._instance = new TsukiServer(config);
+      TsukiServer._instance = new TsukiServer(appData);
       // ... any one time initialization goes here ...
     }
     return TsukiServer._instance;
   }
 
-  public async listen() {
+  private async listen() {
     await this.http.listen(this.http.port, () => console.log(`Server start @ http://localhost:${this.http.port} ...`));
   }
 
