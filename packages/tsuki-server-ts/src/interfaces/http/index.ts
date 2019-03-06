@@ -10,26 +10,23 @@ import cookieParser from 'cookie-parser';
 
 import { TsukiHttp } from './server';
 import { TsukiAPI } from './api';
-import { IConfig } from '../../typings/config';
-import { IAppData } from '../../typings/app';
+import { IConfig, IAppData } from '../../typings';
 
 export class TsukiServer {
   private static _instance: TsukiServer;
-  private http: TsukiHttp;
-  private api: TsukiAPI;
-  private express: express.Application;
-  private config: IConfig;
+  private _http: TsukiHttp;
+  private _api: TsukiAPI;
+  private _express: express.Application;
+  private _config: IConfig;
 
   private constructor({ config, database }: IAppData) {
-    this.config = config;
-    this.express = express();
+    this._config = config;
+    this._express = express();
 
-    if (this.config.APP_PORT) {
-      this.express.set('port', this.config.APP_PORT);
-    }
-
-    this.http = TsukiHttp.getInstance(this.config.APP_PORT, this.express);
-    this.api = TsukiAPI.getInstance(database);
+    if (this._config.APP_PORT) { this._express.set('port', this._config.APP_PORT); }
+    
+    this._http = TsukiHttp.getInstance(this._config.APP_PORT, this._express);
+    this._api = TsukiAPI.getInstance(database);
   }
 
   public static getInstance(appData: IAppData): TsukiServer {
@@ -41,19 +38,21 @@ export class TsukiServer {
   }
 
   private async listen() {
-    await this.http.listen(this.http.port, () => console.log(`Server start @ http://localhost:${this.http.port} ...`));
+    await this._http.listen(this._http.port(), () =>
+      console.log(`Server start @ http://localhost:${this._http.port()} ...`)
+    );
   }
 
   public async init() {
-    this.express.use(helmet());
-    this.express.use(cors());
-    this.express.use(compression());
-    this.express.use(json());
-    this.express.use(urlencoded({ extended: false }));
-    this.express.use(cookieParser());
-    this.express.use(morgan(this.config.NODE_ENV));
+    this._express.use(helmet());
+    this._express.use(cors());
+    this._express.use(compression());
+    this._express.use(json());
+    this._express.use(urlencoded({ extended: false }));
+    this._express.use(cookieParser());
+    this._express.use(morgan(this._config.NODE_ENV));
 
-    this.express.use(this.api.router);
+    this._express.use(this._api.router);
 
     await this.listen();
   }
