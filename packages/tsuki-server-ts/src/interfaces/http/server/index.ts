@@ -4,7 +4,7 @@ import { Server as httpServer } from 'http';
 
 export class TsukiHttp extends httpServer {
   private static _instance: TsukiHttp;
-  public port?: string | number | boolean;
+  private _port?: string | number | boolean;
 
   private constructor(port: string | number, express?: ExpressApplication) {
     super(express);
@@ -12,7 +12,7 @@ export class TsukiHttp extends httpServer {
     /**
      * Get port from environment and initialize TsukiServer.
      */
-    this.port = this.normalizePort(port);
+    this._port = this.normalizePort(port);
 
     this.on('error', this.onError);
     this.on('listening', this.onListening);
@@ -27,14 +27,22 @@ export class TsukiHttp extends httpServer {
   }
 
   /**
+   * Getter function for the port property.
+   * @param void
+   * @returns string | number | boolean | undefined
+   */
+  public port(): string | number | boolean | undefined {
+    return this._port;
+  }
+
+  /**
    * Event listener for HTTP server "error" event.
    */
-
   private onError(error: NodeJS.ErrnoException): void {
     if (error.syscall !== 'listen') {
       throw error;
     }
-    const bind = typeof this.port === 'string' ? 'Pipe ' + this.port : 'Port ' + this.port;
+    const bind = typeof this._port === 'string' ? 'Pipe ' + this._port : 'Port ' + this._port;
     switch (error.code) {
       case 'EACCES':
         console.error(`${bind} requires elevated privileges`);
