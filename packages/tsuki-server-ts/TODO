@@ -11,6 +11,7 @@ Database:
     I was thinking about making it a Singleton, but I don't think that will come in handy to use the connection to look
     for different models in the db.
       One idea is to make it an inheritable class so that I can make 'repo' to manage each model in the collection.
+  
 
 
 Logging:
