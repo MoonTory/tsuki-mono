@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { IController } from '../../../../typings/http/controller';
+import { IController } from '../../../../typings';
 import { parseDirFolderNames } from '../parseDirFolderNames';
 
 export const importAllControllers = async (): Promise<IController[]> => {

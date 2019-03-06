@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { IController } from '../../../typings/http/controller';
+import { IController } from '../../../typings';
 import { importAllControllers } from '../helpers/importControllers';
 import { TsukiDB } from '../../../infra/db';
 

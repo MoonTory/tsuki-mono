@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { IController } from '../../../../typings/http/controller';
+import { IController } from '../../../../typings';
 
 export default class AuthController extends IController {
   constructor(path: string) {

@@ -1,7 +1,7 @@
 import { Schema, Model, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-import { IUserModel } from '../../../../domain/user';
+import { IUserModel } from '../../../../typings';
 
 export const UserSchema = new Schema(
   {

@@ -3,8 +3,7 @@
  */
 import { TsukiServer } from '../interfaces/http';
 import { TsukiDB } from '../infra/db';
-import { IConfig } from '../typings/config';
-import { IAppData } from '../typings/app';
+import { IAppData, IConfig } from '../typings';
 
 // I have refactored this class, and basically stripped it down of most of it's obligations, I am still thinking of how
 // to better structure it, maybe thinking about (Domain Driven Design), just a consideration
