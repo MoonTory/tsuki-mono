@@ -23,8 +23,10 @@ export class TsukiServer {
     this._config = config;
     this._express = express();
 
-    if (this._config.APP_PORT) { this._express.set('port', this._config.APP_PORT); }
-    
+    if (this._config.APP_PORT) {
+      this._express.set('port', this._config.APP_PORT);
+    }
+
     this._http = TsukiHttp.getInstance(this._config.APP_PORT, this._express);
     this._api = TsukiAPI.getInstance(database);
   }

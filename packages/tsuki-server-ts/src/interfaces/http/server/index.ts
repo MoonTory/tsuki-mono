@@ -1,25 +1,43 @@
 import debug from 'debug';
-import { Application as ExpressApplication } from 'express';
-import { Server as httpServer } from 'http';
+import express from 'express';
+import http from 'http';
 
-export class TsukiHttp extends httpServer {
+export class TsukiHttp extends http.Server {
   private static _instance: TsukiHttp;
   private _port?: string | number | boolean;
 
-  private constructor(port: string | number, express?: ExpressApplication) {
+  private constructor(port: string | number, express?: express.Application) {
     super(express);
 
-    /**
-     * Get port from environment and initialize TsukiServer.
-     */
-    this._port = this.normalizePort(port);
+    // Get port from environment and initialize TsukiServer.
+    this._port = this.normalizePort(port as string | number);
 
     this.on('error', this.onError);
     this.on('listening', this.onListening);
   }
 
-  public static getInstance(port: string | number, express?: ExpressApplication): TsukiHttp {
+  /**
+   * Instance getter method, pass port & express application on first initialization. Otherwise the function will either
+   * throw a 'warning' for when no 'port' is provided, and defaulting to 5007; and throws an 'Fatal Error' when no
+   * express application is provided.
+   * @param port string | number | undefined
+   * @param express express.Application | undefined
+   * @returns TsukiTHttp
+   */
+  public static getInstance(port?: string | number, express?: express.Application): TsukiHttp {
     if (!TsukiHttp._instance) {
+      if (!port) {
+        const err = new Error(
+          "WARNING: A 'port' property was not defined, defaulting to 5007. Please pass a 'port' on first intialization to get rid of this warning..."
+        );
+        process.emitWarning(err);
+        port = 5007;
+      } else if (!express) {
+        throw new Error(
+          'TsukiHttp was unable to initialize, please provide an express instance on first initialization!'
+        );
+      }
+
       TsukiHttp._instance = new TsukiHttp(port, express);
       // ... any one time initialization goes here ...
     }
@@ -27,7 +45,7 @@ export class TsukiHttp extends httpServer {
   }
 
   /**
-   * Getter function for the port property.
+   * Returns the 'port' property of the TsukiHttp instance. This is a getter method.
    * @param void
    * @returns string | number | boolean | undefined
    */

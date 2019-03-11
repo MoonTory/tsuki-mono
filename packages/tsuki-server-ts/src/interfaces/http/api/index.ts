@@ -7,18 +7,17 @@ import { TsukiDB } from '../../../infra/db';
 export class TsukiAPI {
   private static _instance: TsukiAPI;
   private readonly path: string = '/api';
-  private database: TsukiDB.MongoDB;
+  // private database: TsukiDB.MongoDB;
   public router: Router;
 
   private constructor(database: TsukiDB.MongoDB) {
-    this.database = database;
+    // this.database = database;
 
     this.config();
   }
 
   private async config() {
     this.router = Router();
-    this.database.print(); // This is just to test the function, otherwise ts give unused error
     this.initialize(await importAllControllers());
   }
 
