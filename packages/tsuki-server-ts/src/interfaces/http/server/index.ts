@@ -28,7 +28,7 @@ export class TsukiHttp extends http.Server {
     if (!TsukiHttp._instance) {
       if (!port) {
         const err = new Error(
-          "WARNING: A 'port' property was not defined, defaulting to 5007. Please pass a 'port' on first intialization to get rid of this warning..."
+          "WARNING: A 'port' property was not defined, defaulting to 5007. Please provide a 'port' on first intialization to get rid of this warning..."
         );
         process.emitWarning(err);
         port = 5007;
