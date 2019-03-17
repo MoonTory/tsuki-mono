@@ -7,17 +7,17 @@ export const importAllControllers = async (): Promise<IController[]> => {
   try {
     const modules: string[] = await parseDirFolderNames('src/interfaces/http/controllers/');
 
-    const controllers: IController[] = [];
+    const payload: IController[] = [];
 
     modules.forEach(controllerURI => {
       let dirPath: string = 'src/interfaces/http/controllers/' + controllerURI;
-      let controllerPath: string = path.resolve(dirPath);
-      let Controller = require(controllerPath);
-      let controller = new Controller.default(controllerURI);
-      controllers.push(controller);
+      let resolvedPath: string = path.resolve(dirPath);
+      let module = require(resolvedPath);
+      let controller = new module.default(controllerURI);
+      payload.push(controller);
     });
 
-    return controllers;
+    return payload;
   } catch (error) {
     throw error;
   }
