@@ -2,6 +2,12 @@ import debug from 'debug';
 import express from 'express';
 import http from 'http';
 
+/**
+ * TsukiHttp is a singletion class is utilized as an http interface for the application. On first initialization, a
+ * 'port' property & an 'express' instance must be provided, so that it may properly configured. The application will
+ * throw a warning if none was provided on initialization.
+ * @class TsukiHttp
+ */
 export class TsukiHttp extends http.Server {
   private static _instance: TsukiHttp;
   private _port?: string | number | boolean;
@@ -20,6 +26,8 @@ export class TsukiHttp extends http.Server {
    * Instance getter method, pass port & express application on first initialization. Otherwise the function will either
    * throw a 'warning' for when no 'port' is provided, and defaulting to 5007; and throws an 'Fatal Error' when no
    * express application is provided.
+   * @class TsukiHttp
+   * @static
    * @param port string | number | undefined
    * @param express express.Application | undefined
    * @returns TsukiTHttp
@@ -78,7 +86,6 @@ export class TsukiHttp extends http.Server {
   /**
    * Event listener for HTTP server "listening" event.
    */
-
   private onListening(): void {
     const addr = this.address();
     const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
@@ -88,7 +95,6 @@ export class TsukiHttp extends http.Server {
   /**
    * Normalize a port into a number, string, or false.
    */
-
   private normalizePort(val: number | string): number | string | boolean {
     const port: number = typeof val === 'string' ? parseInt(val, 10) : val;
     if (isNaN(port)) {
