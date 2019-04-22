@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
 export abstract class IController {
-  protected path: string;
+  protected _path: string;
   public router: Router;
 
   constructor(path: string) {
-    this.path = '/' + path;
+    this._path = '/' + path;
     this.router = Router();
   }
 }

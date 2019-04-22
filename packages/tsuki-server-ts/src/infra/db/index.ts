@@ -2,17 +2,17 @@ import { connectMongo } from './mongo/connectMongo';
 
 export namespace TsukiDB {
   export class MongoDB {
-    private MONGO_URI: string;
+    private _mongoUri: string;
 
     constructor(connectionString: string) {
-      this.MONGO_URI = connectionString;
+      this._mongoUri = connectionString;
     }
 
-    public connect = async () => {
-      connectMongo(this.MONGO_URI);
+    public connect = async (): Promise<void> => {
+      await connectMongo(this._mongoUri);
     };
 
-    public print = () => {
+    public print = (): void => {
       console.log('Databse print function!');
     };
   }

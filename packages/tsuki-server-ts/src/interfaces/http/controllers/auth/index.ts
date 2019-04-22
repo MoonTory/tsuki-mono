@@ -9,8 +9,8 @@ export default class AuthController extends IController {
   }
 
   public async init() {
-    this.router.get(this.path + '/register', this.register);
-    console.log(this.path + ' Initialized successfully...');
+    this.router.get(this._path + '/register', this.register);
+    console.log(this._path + ' Initialized successfully...');
   }
 
   private register = async (req: Request, res: Response, next: NextFunction) => {

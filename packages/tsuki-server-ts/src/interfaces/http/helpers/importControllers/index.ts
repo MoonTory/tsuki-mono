@@ -28,7 +28,7 @@ export const importController = (controllerUri: string) => {
     let controllerPath = path.resolve('src/interfaces/http/controllers/', controllerUri);
     let cntrl = require(controllerPath);
 
-    console.log('cntrl', cntrl);
+    // console.log('cntrl', cntrl);
 
     const controller = new cntrl.default(controllerUri);
 

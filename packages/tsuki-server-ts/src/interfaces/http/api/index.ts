@@ -6,7 +6,7 @@ import { TsukiDB } from '../../../infra/db';
 
 export class TsukiAPI {
   private static _instance: TsukiAPI;
-  private readonly path: string = '/api';
+  private readonly _path: string = '/api';
   // private database: TsukiDB.MongoDB;
   public router: Router;
 
@@ -23,7 +23,7 @@ export class TsukiAPI {
 
   private initialize(controllers: IController[]) {
     controllers.forEach((el: IController) => {
-      this.router.use(this.path, el.router);
+      this.router.use(this._path, el.router);
     });
   }
 
